@@ -1,0 +1,56 @@
+<div class="header">
+  <!--<img src="./assets/logo/logo1.png" alt="">-->
+</div>
+<!--../../../../assets-->
+<div class="page-cont-area">
+  <div class="jurisdictionModule">
+    <p class="cateTit">个人办公</p>
+    <div class="categroArea" nz-row>
+      <div nz-col [nzSpan]="6" (click)="myWorks()">
+        <div><img src="./assets/img/renwu.png" alt=""></div>
+        <p class="cateOneTit">我的任务</p>
+      </div>
+      <div nz-col [nzSpan]="6" (click)="myLogs()">
+        <div><img src="./assets/img/mylogs.png" alt=""></div>
+        <p>我的日志</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="limits !== 'ROLE_USER'" class="jurisdictionModule">
+    <p class="cateTit">项目管理</p>
+    <div class="categroArea" nz-row>
+      <div nz-col [nzSpan]="6" (click)="progressList()">
+        <div><img src="./assets/img/progressList.png" alt=""></div>
+        <p>项目列表</p>
+      </div>
+      <div nz-col [nzSpan]="6" (click)="taskList()">
+        <div><img src="./assets/img/taskList.png" alt=""></div>
+        <p>任务列表</p>
+      </div>
+      <div nz-col [nzSpan]="6" (click)="newProgress()">
+        <div><img src="./assets/img/newProgress.png" alt=""></div>
+        <p>新建项目</p>
+      </div>
+      <div nz-col [nzSpan]="6" (click)="distribute()">
+        <div><img src="./assets/img/newTask.png" alt=""></div>
+        <p>派发任务</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="limits === 'ROLE_ADMIN'" class="jurisdictionModule" nz-row>
+    <p class="cateTit">日志管理</p>
+    <div class="categroArea">
+      <div nz-col [nzSpan]="6" (click)="workLogs()">
+        <div>
+          <img src="./assets/img/worklog.png" alt=""></div>
+        <p>工作日志</p>
+      </div>
+      <div nz-col [nzSpan]="6" (click)="progressLogs()">
+        <div>
+          <img src="./assets/img/progresslog.png" alt=""></div>
+        <p>项目日志</p>
+      </div>
+    </div>
+  </div>
+</div>
+

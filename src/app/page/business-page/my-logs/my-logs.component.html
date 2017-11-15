@@ -1,0 +1,95 @@
+<div class="page-cont-area">
+  <div class="editLogBox" nz-row>
+    <p nz-col [nzSpan]="8" class="largeHL">
+      日志类型：
+    </p>
+    <p nz-col [nzSpan]="16">
+      <nz-select [nzSize]="'large'" style="width: 100%;" [(ngModel)]="selectedOption" (nzOpenChange)="typeOpen()">
+        <nz-option
+          *ngFor="let option of options"
+          [nzLabel]="option.label"
+          [nzValue]="option"
+          [nzDisabled]="option['disabled']">
+        </nz-option>
+      </nz-select>
+    </p>
+  </div>
+
+  <!--<div class="editLogBox editLogTi">-->
+  <!--<p class="logtit">-->
+  <!--日志标题：-->
+  <!--</p>-->
+  <!--<p class="logTitInpt">-->
+  <!--<input [(ngModel)]="logTitle" type="text" name="mylog" id="mylog" class="logEditTitle">-->
+  <!--</p>-->
+  <!--</div>-->
+  <div *ngIf="selectedOption.value === 'work'" class="editLogBox" nz-row>
+    <p nz-col [nzSpan]="8" class="largeHL">
+      选择任务：
+    </p>
+    <p *ngIf="taskListDa.length === 0" nz-col [nzSpan]="16" class="textRight">当前无未完成的任务可选！</p>
+    <div *ngIf="taskListDa.length !== 0" nz-col [nzSpan]="16">
+      <app-scroll-select [size]="'large'" [selectList]="taskListDa"
+                         (checkedSele)="selectTask($event)"></app-scroll-select>
+    </div>
+  </div>
+  <div *ngIf="selectedOption?.value === 'prog'" nz-row class="editLogBox">
+    <p nz-col [nzSpan]="8" class="largeHL">
+      选择项目：
+    </p>
+    <p *ngIf="checkOptionsOne.length === 0" nz-col [nzSpan]="16" class="textRight">当前无未完成的项目可选！</p>
+    <div *ngIf="checkOptionsOne.length !== 0" nz-col [nzSpan]="16">
+      <app-scroll-select [size]="'large'" [selectList]="checkOptionsOne"
+                         (checkedSele)="selectProj($event)"></app-scroll-select>
+    </div>
+  </div>
+  <div *ngIf="selectedOption.value === 'work'" class="editLogBox">
+    <p>日志内容：</p>
+    <nz-input [(ngModel)]="inputValue" [nzType]="'textarea'" [nzAutosize]="{minRows: 10}"
+              [nzPlaceHolder]="'今日工作详细'"></nz-input>
+  </div>
+  <div class="editLogBox">
+    <p>备注说明：</p>
+    <nz-input [(ngModel)]="remarkDesc" [nzType]="'textarea'" [nzAutosize]="{minRows: 4}"
+              [nzPlaceHolder]="'备注说明'"></nz-input>
+  </div>
+
+  <div *ngIf="selectedOption.value === 'work'" class="editLogBox">
+    <p>提交附件：</p>
+    <div>
+      <div class="uploadBox">
+        <input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)" multiple
+               class="inputNoSty"/>
+        <button nz-button [nzType]="'primary'" [nzSize]="'large'">
+          <i class="anticon anticon-upload"></i><span>选择文件</span>
+        </button>
+      </div>
+      <span>已选择：{{uploader.queue.length}}个文件</span>
+    </div>
+    <ul>
+      <li *ngFor="let item of uploader.queue" nz-row class="marginTop">
+        <!--(click)="item.upload()"-->
+        <div nz-col [nzSpan]="10">
+          <p>{{ item?.file?.name }}</p>
+        </div>
+        <div nz-col nz-row [nzSpan]="14">
+          <div nz-col [nzSpan]="12" class="textCenter">
+            <button nz-button [nzType]="'primary'" (click)="fileUp(item)" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+              <i class="anticon anticon-upload"></i><span>上传</span>
+            </button>
+          </div>
+          <div nz-col [nzSpan]="12" class="textCenter">
+            <button nz-button [nzType]="'primary'"
+                    (click)="fileRemove(item)">
+              <i class="anticon anticon-delete"></i><span>移除</span>
+            </button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <button nz-button [nzSize]="'large'" [nzType]="'primary'" class="logBtn ant-mypri-btn" (click)="logSubmit()">
+    <span>提交日志</span>
+  </button>
+</div>

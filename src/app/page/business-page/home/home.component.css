@@ -1,0 +1,16 @@
+.homeBox{
+  height:100%;
+  display: flex;
+  flex-direction:column;
+}
+.homeContents{
+  flex: 1;
+}
+.homeHeader{
+
+}
+.homeFooter p{
+  text-align:center;
+  padding:0.625rem 0;
+  color:#999;
+}

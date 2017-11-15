@@ -1,0 +1,32 @@
+<div class="page-cont-area">
+  <div id="wrapper">
+    <div nz-row class="marginTopFi">
+      <p nz-col [nzSpan]="8" class="largeHL">
+        选择状态：
+      </p>
+      <p nz-col [nzSpan]="16">
+        <nz-select [nzSize]="'large'" style="width: 100%;" [(ngModel)]="selectedState"
+                   (nzOpenChange)="chooseState()"
+        >
+          <nz-option
+            *ngFor="let option of proState"
+            [nzLabel]="option.label"
+            [nzValue]="option"
+            [nzDisabled]="option['disabled']">
+          </nz-option>
+        </nz-select>
+      </p>
+    </div>
+    <div class="coteTaskLis">
+      <h2 [ngClass]="taskTitClas" *ngIf="myWorksList.length !== 0">{{selectedState.label}}任务：</h2>
+      <ul [class]="selectedState.value === 'finished' ? 'taskLists taskClose' : 'taskLists'">
+        <!--trackBy    *ngFor="let ite of myWorksList; trackBy: trackByHeroes"-->
+        <li *ngFor="let ite of myWorksList; trackBy: trackByHeroes" (click)="myTaskDetail(ite)" nz-row>
+          <p class="showTaskTit" nz-col [nzSpan]="16">{{ite?.name}} </p>
+          <p class="textRight" nz-col [nzSpan]="8">{{ite?.projectName}}</p>
+        </li>
+        <p *ngIf="myWorksList.length === 0" class="textCenter">还没有此类任务！</p>
+      </ul>
+    </div>
+  </div>
+</div>

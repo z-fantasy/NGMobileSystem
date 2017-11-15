@@ -1,0 +1,10 @@
+{
+  "/mobile": {
+    "target": "http://192.168.160.241:8015",
+    "secure": false
+  },
+  "/sys": {
+    "target": "http://192.168.160.241:8015",
+    "secure": false
+  }
+}

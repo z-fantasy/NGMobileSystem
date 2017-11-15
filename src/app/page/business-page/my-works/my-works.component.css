@@ -1,0 +1,15 @@
+.coteTaskLis{
+  margin-top:0.75rem;
+}
+.coteTskTit{
+  padding: 0.25rem;
+}
+.being{
+  color: red;
+}
+.nedTest{
+  color: green;
+}
+.taskClose{
+  color: #999;
+}

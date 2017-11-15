@@ -1,0 +1,45 @@
+<div class="page-cont-area">
+  <p class="logTit marginTopFi">{{proLogDet['projectName']}}</p>
+  <div class="marginTopFi">
+    <p>所属项目：{{proLogDet['projectName']}}</p>
+    <!--<p>日志内容：{{proLogDet['notes']}}</p>-->
+    <p>备注: {{proLogDet['notes']}}</p>
+  </div>
+  <div class="marginTopFi time">
+    <p>提交人员：{{proLogDet['managerName']}}</p>
+    <!--<p>所属部门：电子业务部</p>-->
+    <p *ngIf="proLogDet['starTime']">开始日期：{{proLogDet['starTime'] | date: 'yyyy-MM-dd HH:mm:ss' }}</p>
+    <p *ngIf="proLogDet['projectEndTime']">结束日期：{{proLogDet['projectEndTime'] | date: 'yyyy-MM-dd HH:mm:ss' }}</p>
+  </div>
+</div>
+<div class="editMyTask" (click)="showModal()" [style.bottom]="'6rem'">
+  <i class="anticon anticon-edit"></i>
+</div>
+<div class="editMyTask" (click)="deleteid()">
+  <i class="anticon anticon-delete"></i>
+</div>
+
+<nz-modal [nzVisible]="isVisible" [nzTitle]="'修改项目日志'" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)" [nzMaskClosable]="false" [nzStyle]="style">
+  <ng-template #modalContent>
+    <div>
+      <div nz-row>
+        <p>项目名称：</p>
+        <div nz-col [nzSpan]="24">
+          <app-scroll-select *ngIf="controlScrol" [selectList]="selectList" [selectValue]="seleProj" (checkedSele)="getYear($event)" [size]="'large'"></app-scroll-select>
+        </div>
+      </div>
+      <!--<div nz-row>-->
+        <!--<p>内容：</p>-->
+        <!--<div nz-col [nzSpan]="24">-->
+          <!--<nz-input [(ngModel)]="progRamk" [nzType]="'textarea'" [nzRows]="'6'" [nzPlaceHolder]="'项目备注'"></nz-input>-->
+        <!--</div>-->
+      <!--</div>-->
+      <div nz-row>
+        <p>备注：</p>
+        <div nz-col [nzSpan]="24">
+          <nz-input [(ngModel)]="progRamk" [nzType]="'textarea'" [nzRows]="'8'" [nzPlaceHolder]="'项目备注'"></nz-input>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</nz-modal>

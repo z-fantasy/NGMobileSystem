@@ -1,0 +1,27 @@
+<div class="page-cont-area">
+<p class="logTit marginTopFi">{{workLogDetail['taskName']}}</p>
+  <div class="marginTopFi">
+    <p>所属任务：{{workLogDetail['taskName']}}</p>
+    <p>日志内容：{{workLogDetail['detail'] !== 'undefined' ? workLogDetail['detail'] : '无'}}</p>
+    <p>备注: 无</p>
+    <div class="marginTop">
+      <p>附件：</p>
+      <ul>
+        <li class="downLi" *ngFor="let ite of workLogDetail['attachment']">
+          <p (click)="downFile(ite['value'], ite['label'])">
+            {{ite['label']}}
+          </p>
+        </li>
+      </ul>
+      <p *ngIf="workLogDetail['attachment'].length === 0" class="">无</p>
+    </div>
+  </div>
+  <div class="marginTopFi time">
+    <small>提交日期：{{workLogDetail['endTime'] | date: 'yyyy-MM-dd HH:mm:ss'}}</small><br>
+    <small>提交人员：{{workLogDetail['assignmentName']}}</small><br>
+    <!--<small>所属部门：电子业务部</small>-->
+  </div>
+</div>
+<div class="editMyTask" (click)="showModal()">
+  <i class="anticon anticon-delete"></i>
+</div>

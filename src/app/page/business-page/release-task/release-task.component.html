@@ -1,0 +1,95 @@
+<div class="page-cont-area">
+  <div nz-row class="marginTopFi">
+    <p nz-col [nzSpan]="8">
+      任务名称：
+    </p>
+    <div nz-col [nzSpan]="16">
+      <nz-input [(ngModel)]="taskName" [nzType]="'textarea'" [nzRows]="'2'" [nzPlaceHolder]="'任务名称'"></nz-input>
+    </div>
+  </div>
+  <div nz-row class="marginTopFi">
+    <p nz-col [nzSpan]="8">
+      所属项目：
+    </p>
+    <div nz-col [nzSpan]="16">
+      <nz-select style="width: 100%;" [(ngModel)]="sinleProg" [nzSize]="'large'">
+        <nz-option
+          *ngFor="let option of progs"
+          [nzLabel]="option.label"
+          [nzValue]="option.value"
+          [nzDisabled]="option['disabled']">
+        </nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <div nz-row class="marginTopFi">
+    <p nz-col [nzSpan]="8">
+      执行人员：
+    </p>
+    <div nz-col [nzSpan]="16">
+      <app-scroll-select [selectList]="searchOptions" (checkedSele)="getYear($event)" [size]="'large'" [selectValue]="selectUser"></app-scroll-select>
+    </div>
+  </div>
+  <div nz-row class="marginTopFi">
+    <p nz-col [nzSpan]="8">
+      任务状态：
+    </p>
+    <div nz-col [nzSpan]="16">
+      <nz-select style="width: 100%;" [(ngModel)]="single" [nzSize]="'large'">
+        <nz-option
+          *ngFor="let option of options"
+          [nzLabel]="option.label"
+          [nzValue]="option.value"
+          [nzDisabled]="option['disabled']">
+        </nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <!--<div nz-row class="marginTopFi">-->
+  <!--<p nz-col [nzSpan]="8">-->
+  <!--优先级：-->
+  <!--</p>-->
+  <!--<div nz-col [nzSpan]="16">-->
+  <!--<nz-select style="width: 100%;" [(ngModel)]="taskmo" [nzSize]="size">-->
+  <!--<nz-option-->
+  <!--*ngFor="let option of taskRank"-->
+  <!--[nzLabel]="option.label"-->
+  <!--[nzValue]="option.value"-->
+  <!--[nzDisabled]="option.disabled">-->
+  <!--</nz-option>-->
+  <!--</nz-select>-->
+  <!--</div>-->
+  <!--</div>-->
+  <div nz-row class="marginTopFi">
+    <p nz-col [nzSpan]="8">
+      任务进度：
+    </p>
+    <div nz-col [nzSpan]="16">
+      <nz-input [(ngModel)]="taskprogress" [nzSize]="'large'">
+        <ng-template #addOnAfter>%</ng-template>
+      </nz-input>
+    </div>
+  </div>
+  <div class="marginTopFi">
+    <p>
+      任务内容：
+    </p>
+    <div>
+      <nz-input [(ngModel)]="taskCont" [nzType]="'textarea'" [nzRows]="'12'" [nzPlaceHolder]="'任务内容'">
+      </nz-input>
+    </div>
+  </div>
+  <!--<div class="marginTopFi">-->
+  <!--<p>-->
+  <!--任务备注：-->
+  <!--</p>-->
+  <!--<div>-->
+  <!--<nz-input [(ngModel)]="taskRamk" [nzType]="'textarea'" [nzRows]="'3'" [nzPlaceHolder]="'任务备注'"></nz-input>-->
+  <!--</div>-->
+  <!--</div>-->
+  <div class="marginTopFi">
+    <button class="widthOne ant-mypri-btn" nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="taskSave()" [disabled]="!canAddNew">
+      <span>保存</span>
+    </button>
+  </div>
+</div>

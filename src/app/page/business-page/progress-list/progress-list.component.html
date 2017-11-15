@@ -1,0 +1,66 @@
+<div class="page-cont-area">
+  <div nz-row class="marginTopFi">
+    <p nz-col [nzSpan]="8" class="largeHL">
+      选择年份：
+    </p>
+    <div nz-col [nzSpan]="16">
+      <!--<nz-datepicker class="widthOne" [nzSize]="'large'" [(ngModel)]="_month" [nzPlaceHolder]="'Select date'" [nzFormat]="'YYYY/MM'" [nzMode]="'month'"></nz-datepicker>-->
+      <app-scroll-select [selectList]="selectList" (checkedSele)="getYear($event)" [size]="'large'"></app-scroll-select>
+    </div>
+  </div>
+  <div nz-row class="marginTopFi">
+    <p nz-col [nzSpan]="8" class="largeHL">
+      选择状态：
+    </p>
+    <div nz-col [nzSpan]="16">
+      <nz-select [nzSize]="'large'" style="width: 100%;" [(ngModel)]="selectedState" (nzOpenChange)="panclChange()">
+        <nz-option
+          *ngFor="let option of proState"
+          [nzLabel]="option.label"
+          [nzValue]="option"
+          [nzDisabled]="option['disabled']">
+        </nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <ul class="progressUl">
+    <li class="progressLi" *ngFor="let ite of progressList; trackBy: trackByHeroes" (click)="goProDetail(ite)">
+      <p nz-row>
+        <small nz-col [nzSpan]="10">
+          项目名称：
+        </small>
+        <small nz-col [nzSpan]="14" class="proname">
+          {{ite['name']}}
+        </small>
+      </p>
+      <p nz-row class="proMar">
+        <small nz-col [nzSpan]="10">
+          项目进度：
+        </small>
+        <small nz-col [nzSpan]="14">
+          <nz-progress [ngModel]="ite['progress'] > 100 ? 100 : ite['progress'] " [nzStrokeWidth]="5" [nzStatus]="'active'"></nz-progress>
+        </small>
+      </p>
+      <p nz-row class="proMar">
+        <small nz-col [nzSpan]="10">
+          项目开始时间：
+        </small>
+        <small nz-col [nzSpan]="14" class="proname">
+          {{ite['createTime'] | date: 'yyyy-MM-dd HH:mm:ss'}}
+        </small>
+      </p>
+      <p *ngIf="selectedState.value === 'finished'" nz-row class="proMar">
+        <small nz-col [nzSpan]="10">
+          项目结束时间：
+        </small>
+        <small nz-col [nzSpan]="14" class="proname">
+          {{ite.endTime | date: 'yyyy-MM-dd HH:mm:ss'}}
+        </small>
+      </p>
+    </li>
+  </ul>
+  <p *ngIf="progressList.length === 0" class="textCenter">这个筛选条件下还没有项目哦</p>
+</div>
+<!--<div class="editMyTask" (click)="newProgress()">-->
+  <!--<i class="anticon anticon-plus"></i>-->
+<!--</div>-->

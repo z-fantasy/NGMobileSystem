@@ -1,0 +1,19 @@
+<div class="page-cont-area">
+  <div id="wrapper">
+    <div class="marginTopFi">
+      <p [style.fontWeight]="'bold'">工作日志列表：</p>
+      <ul class="taskLists taskClose marginTopFi">
+        <li *ngFor="let ite of workLogList;trackBy: trackByHeroes" (click)="workLDetail(ite)" nz-row>
+          <p class="showTaskTit" nz-col [nzSpan]="14">{{ite['taskName']}} </p>
+          <p nz-col [nzSpan]="10" class="textRight">
+            <small>{{ite['assignmentName']}}</small>
+            <small>{{ite['endTime'] | date: 'yyyy-MM-dd'}}</small>
+          </p>
+        </li>
+      </ul>
+      <p *ngIf="workLogList.length === 0" class="textCenter">
+        当前还没有任何工作日志！
+      </p>
+    </div>
+  </div>
+</div>

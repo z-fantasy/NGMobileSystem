@@ -1,0 +1,17 @@
+<div class="page-cont-area">
+  <div id="wrapper">
+    <div class="marginTopFi">
+      <p [style.fontWeight]="'bold'">项目日志列表：</p>
+      <ul class="taskLists taskClose marginTopFi">
+        <li *ngFor="let ite of progLogList" (click)="progLDetail(ite)" nz-row>
+          <p class="showTaskTit" nz-col [nzSpan]="16">{{ite['projectName']}}</p>
+          <div nz-col [nzSpan]="8" class="textRight">
+            <small>{{ite['managerName']}}</small>
+            <!--<small>{{ ite['endTime'] | date: 'yyyy-MM-dd'}}</small>-->
+          </div>
+        </li>
+      </ul>
+      <p *ngIf="progLogList.length === 0">当前还没有任何项目日志！</p>
+    </div>
+  </div>
+</div>

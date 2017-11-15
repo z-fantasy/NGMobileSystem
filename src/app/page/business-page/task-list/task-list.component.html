@@ -1,0 +1,153 @@
+<div class="page-cont-area">
+  <div nz-row class="marginTopFi">
+    <p nz-col [nzSpan]="8" class="largeHL">
+      选择状态：
+    </p>
+    <div nz-col [nzSpan]="16">
+      <nz-select [nzSize]="'large'" style="width: 100%;" [(ngModel)]="selectedState" (nzOpenChange)="panclChange()">
+        <nz-option
+          *ngFor="let option of proState"
+          [nzLabel]="option.label"
+          [nzValue]="option"
+          [nzDisabled]="option['disabled']">
+        </nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <div *ngIf="isLoad" nz-row class="marginTopFi">
+    <p nz-col [nzSpan]="8" class="largeHL">
+      选择人员：
+    </p>
+    <div nz-col [nzSpan]="16">
+      <app-scroll-select [selectList]="selectList" [selectValue]="selectPeople" (checkedSele)="getYear($event)" [size]="'large'"></app-scroll-select>
+    </div>
+  </div>
+  <div class="marginTopFi">
+    <ul class="taskLists">
+      <!--trackBy    *ngFor="let ite of myWorksList; trackBy: trackByHeroes"-->
+      <li *ngFor="let ite of myWorksList" (click)="taskDetail(ite)" nz-row>
+        <p class="showTaskTit" nz-col [nzSpan]="16">{{ite.name}} </p>
+        <small class="float-right textRight" nz-col  [nzSpan]="8">{{ite.statusCn}}</small>
+      </li>
+    </ul>
+    <p *ngIf="myWorksList.length === 0" class="textCenter">当前筛选条件下没有数据！</p>
+  </div>
+
+  <!--<div class="taskCateBox">-->
+    <!--<div nz-row>-->
+      <!--<p nz-col [nzSpan]="10">项目名称：</p>-->
+      <!--<p nz-col [nzSpan]="14" class="textRight">这是项目名称</p>-->
+    <!--</div>-->
+    <!--<div nz-row>-->
+      <!--<p nz-col [nzSpan]="10">开始时间：</p>-->
+      <!--<p nz-col [nzSpan]="14" class="textRight">2017-10-9</p>-->
+    <!--</div>-->
+    <!--<div nz-row>-->
+      <!--<p nz-col [nzSpan]="10">预计完成时间：</p>-->
+      <!--<p nz-col [nzSpan]="14" class="textRight">2017-11-10</p>-->
+    <!--</div>-->
+    <!--<div nz-row>-->
+      <!--<p nz-col [nzSpan]="10">结束时间：</p>-->
+      <!--<p nz-col [nzSpan]="14" class="textRight">2017-11-09</p>-->
+    <!--</div>-->
+    <!--<div nz-row>-->
+      <!--<p nz-col [nzSpan]="10">项目进度：</p>-->
+      <!--<p nz-col [nzSpan]="14">-->
+        <!--<nz-progress [ngModel]="50" [nzStrokeWidth]="5" [nzStatus]="'active'"></nz-progress>-->
+      <!--</p>-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--<p>任务分配：</p>-->
+      <!--<ul class="taskList">-->
+        <!--<li class="taskLi" nz-row>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis">张三</p>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis textCenter">5条</p>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis textRight">-->
+            <!--<button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="taskDetail()">-->
+              <!--<span>详情</span>-->
+            <!--</button>-->
+          <!--</p>-->
+        <!--</li>-->
+        <!--<li class="taskLi" nz-row>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis">李四</p>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis textCenter">5条</p>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis textRight">-->
+            <!--<button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="taskDetail()">-->
+              <!--<span>详情</span>-->
+            <!--</button>-->
+          <!--</p>-->
+        <!--</li>-->
+        <!--<li class="taskLi" nz-row>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis">王二</p>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis textCenter">0条</p>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis textRight">-->
+            <!--<button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="taskDetail()">-->
+              <!--<span>详情</span>-->
+            <!--</button>-->
+          <!--</p>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="taskCateBox">-->
+    <!--<div nz-row>-->
+      <!--<p nz-col [nzSpan]="10">项目名称：</p>-->
+      <!--<p nz-col [nzSpan]="14" class="textRight">这是项目名称</p>-->
+    <!--</div>-->
+    <!--<div nz-row>-->
+      <!--<p nz-col [nzSpan]="10">开始时间：</p>-->
+      <!--<p nz-col [nzSpan]="14" class="textRight">2017-10-9</p>-->
+    <!--</div>-->
+    <!--<div nz-row>-->
+      <!--<p nz-col [nzSpan]="10">预计完成时间：</p>-->
+      <!--<p nz-col [nzSpan]="14" class="textRight">2017-11-10</p>-->
+    <!--</div>-->
+    <!--<div nz-row>-->
+      <!--<p nz-col [nzSpan]="10">结束时间：</p>-->
+      <!--<p nz-col [nzSpan]="14" class="textRight">2017-11-09</p>-->
+    <!--</div>-->
+    <!--<div nz-row>-->
+      <!--<p nz-col [nzSpan]="10">项目进度：</p>-->
+      <!--<p nz-col [nzSpan]="14">-->
+        <!--<nz-progress [ngModel]="50" [nzStrokeWidth]="5" [nzStatus]="'active'"></nz-progress>-->
+      <!--</p>-->
+    <!--</div>-->
+    <!--<div nz-row>-->
+      <!--<p nz-col [nzSpan]="10">参与人员：</p>-->
+      <!--<p nz-col [nzSpan]="14" class="textRight">张三、李四、王二、小明张三、李四、王二、小明</p>-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--<p>任务分配：</p>-->
+      <!--<ul class="taskList">-->
+        <!--<li class="taskLi" nz-row>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis">张三</p>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis textCenter">5条</p>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis textRight">-->
+            <!--<button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="taskDetail()">-->
+              <!--<span>详情</span>-->
+            <!--</button>-->
+          <!--</p>-->
+        <!--</li>-->
+        <!--<li class="taskLi" nz-row>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis">李四</p>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis textCenter">5条</p>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis textRight">-->
+            <!--<button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="taskDetail()">-->
+              <!--<span>详情</span>-->
+            <!--</button>-->
+          <!--</p>-->
+        <!--</li>-->
+        <!--<li class="taskLi" nz-row>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis">王二</p>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis textCenter">0条</p>-->
+          <!--<p nz-col [nzSpan]="8" class="wapEllis textRight">-->
+            <!--<button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="taskDetail()">-->
+              <!--<span>详情</span>-->
+            <!--</button>-->
+          <!--</p>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
+  <!--</div>-->
+</div>

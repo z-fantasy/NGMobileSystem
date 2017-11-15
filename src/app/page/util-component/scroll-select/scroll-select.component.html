@@ -1,0 +1,11 @@
+<div [class]="'scroll-select-box-' + size">
+  <div [class]="'scroll-select-showCont-' + size" (click)="openSlect()">{{selectValue?.label}}<span [class]="isOpen ? 'down-icon opSelect' : 'down-icon'">&lt;</span></div>
+  <ul [hidden]="!isOpen" [class]="'scroll-select-ul ' + 'panel-' + size">
+    <li class="scroll-select-li" *ngFor="let item of selectList" (click)="checkIt($event, item)">
+      {{item?.label}}
+    </li>
+    <li></li>
+  </ul>
+</div>
+<div *ngIf="isOpen" class="scoll-select-mask" (click)="closePanel()">
+</div>

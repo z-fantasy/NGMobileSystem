@@ -1,0 +1,46 @@
+<div class="page-cont-area">
+  <h2 class="marginTopFi textCenter">{{taskDetails.name}}</h2>
+  <div class="marginTopFi">
+    <p>所属项目：{{taskDetails.projectName}}</p>
+    <!--<p>任务等级：2</p>-->
+    <div>
+      <p>任务进度：{{taskDetails.progress > 100 ? 100 : taskDetails.progress}}%</p>
+      <p>任务状态：{{taskDetails.statusCn}}</p>
+    </div>
+    <p>任务内容：{{taskDetails.detail}}</p>
+    <p>备注: 无</p>
+  </div>
+  <div class="marginTopFi time">
+    <p *ngIf="taskDetails['createTime']">发布日期：{{taskDetails['createTime'] | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+    <p>任务执行人：{{taskDetails.assignmentName}}</p>
+    <!--<small>所属部门：电子业务部</small>-->
+  </div>
+</div>
+<div class="editMyTask" (click)="showModal()">
+  <i class="anticon anticon-edit"></i>
+</div>
+
+<nz-modal [nzVisible]="isVisible" [nzTitle]="'修改任务状态'" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)" [nzMaskClosable]="false">
+  <ng-template #modalContent>
+    <nz-input (nzBlur)="blurs()" [nzSize]="'large'" [(ngModel)]="siteName">
+      <ng-template #addOnBefore>任务完成进度：</ng-template>
+      <ng-template #addOnAfter>%</ng-template>
+    </nz-input>
+    <nz-progress [(ngModel)]="siteName > 100 ? 100 : siteName" [nzStrokeWidth]="5" [nzStatus]="'active'"></nz-progress>
+    <div nz-row>
+      <p nz-col [nzSpan]="7" class="largeHL">
+        任务状态：
+      </p>
+      <div nz-col [nzSpan]="17">
+        <nz-select [nzSize]="'large'" style="width: 100%;" [(ngModel)]="single" [nzSize]="size" [nzShowSearch]="true">
+          <nz-option
+            *ngFor="let option of options"
+            [nzLabel]="option.label"
+            [nzValue]="option.value"
+            [nzDisabled]="option['disabled']">
+          </nz-option>
+        </nz-select>
+      </div>
+    </div>
+  </ng-template>
+</nz-modal>

@@ -1,0 +1,14 @@
+
+.jurisdictionModule{
+  margin-top:1rem;
+}
+.categroArea >div{
+  text-align:center;
+  margin:0.625rem auto 0;
+}
+.cateTit{
+  font-size:1rem;
+  padding: 0.0625rem 0.83rem;
+  border-left:2px #666 solid;
+  line-height:1;
+}

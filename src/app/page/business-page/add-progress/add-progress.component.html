@@ -1,0 +1,83 @@
+<div class="page-cont-area">
+  <div nz-row class="marginTopFi">
+    <p nz-col [nzSpan]="8" class="largeHL">
+      项目名称：
+    </p>
+    <div nz-col [nzSpan]="16">
+      <nz-input [(ngModel)]="progName" [nzType]="'textarea'" [nzRows]="'2'" [nzPlaceHolder]="'项目名称'"></nz-input>
+    </div>
+  </div>
+  <!--<div nz-row class="marginTopFi">-->
+    <!--<p nz-col [nzSpan]="8" class="largeHL">-->
+      <!--开始时间：-->
+    <!--</p>-->
+    <!--<p nz-col [nzSpan]="16">-->
+      <!--<nz-datepicker [nzSize]="'large'" [style.width]="'100%'" [(ngModel)]="_dateStar" [nzFormat]="'YYYY-MM-DD hh:mm:ss'" [nzPlaceHolder]="'Select date'"></nz-datepicker>-->
+    <!--</p>-->
+  <!--</div>-->
+  <div nz-row class="marginTopFi">
+    <p nz-col [nzSpan]="8" class="largeHL">
+      预计天数：
+    </p>
+    <p nz-col [nzSpan]="16">
+      <nz-input [nzSize]="'large'" [(ngModel)]="datePlan">
+        <ng-template #addOnAfter>天</ng-template>
+      </nz-input>
+    </p>
+  </div>
+  <div nz-row class="marginTopFi">
+    <p nz-col [nzSpan]="8" class="largeHL">
+      项目状态：
+    </p>
+    <div nz-col [nzSpan]="16">
+      <nz-select style="width: 100%;" [(ngModel)]="single" [nzSize]="'large'">
+        <nz-option
+          *ngFor="let option of options"
+          [nzLabel]="option.label"
+          [nzValue]="option.value"
+          [nzDisabled]="option['disabled']">
+        </nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <div nz-row class="marginTopFi">
+    <p nz-col [nzSpan]="8" class="largeHL">
+      项目进度：
+    </p>
+    <div nz-col [nzSpan]="16">
+      <nz-input [(ngModel)]="progress" [nzSize]="'large'">
+        <ng-template #addOnAfter>%</ng-template>
+      </nz-input>
+    </div>
+  </div>
+  <div nz-row class="marginTopFi">
+    <p nz-col [nzSpan]="8" class="largeHL">
+      项目经理：
+    </p>
+    <div nz-col [nzSpan]="16">
+      <app-scroll-select [selectList]="manageList" (checkedSele)="selectManage($event)" [selectValue]="seleMana"></app-scroll-select>
+    </div>
+  </div>
+  <div class="marginTopFi">
+    <p>
+      项目内容：
+    </p>
+    <div>
+      <nz-input [(ngModel)]="progCont" [nzType]="'textarea'" [nzRows]="'12'" [nzPlaceHolder]="'项目内容'">
+      </nz-input>
+    </div>
+  </div>
+  <!--<div class="marginTopFi">-->
+    <!--<p>-->
+      <!--项目备注：-->
+    <!--</p>-->
+    <!--<div>-->
+      <!--<nz-input [(ngModel)]="progRamk" [nzType]="'textarea'" [nzRows]="'3'" [nzPlaceHolder]="'项目备注'"></nz-input>-->
+    <!--</div>-->
+  <!--</div>-->
+  <div class="marginTopFi">
+    <button class="widthOne ant-mypri-btn" nz-button [nzSize]="'large'" [nzType]="'primary'" (click)="saveProg()">
+      <span>保存</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<div class="page-cont-area">
+  <div nz-row class="marginTop">
+    <p nz-col [nzSpan]="8">任务名称：</p>
+    <p *ngIf="!isEditor" nz-col [nzSpan]="16" class="textRight largeHL">{{taskDetail['name']}}</p>
+    <div *ngIf="isEditor" nz-col [nzSpan]="16">
+      <nz-input [(ngModel)]="taskDetail['name']" [nzType]="'textarea'" [nzRows]="'2'" [nzPlaceHolder]="'任务名称'"></nz-input>
+    </div>
+  </div>
+  <div nz-row class="marginTop">
+    <p nz-col [nzSpan]="8">
+      所属项目：
+    </p>
+    <p *ngIf="!isEditor" nz-col [nzSpan]="16" class="textRight">
+      {{taskDetail['projectName']}}
+    </p>
+    <div *ngIf="isEditor" nz-col [nzSpan]="16">
+      <app-scroll-select [selectList]="projList" (checkedSele)="getProj($event)" [selectValue]="selecproj" [size]="'large'"></app-scroll-select>
+    </div>
+  </div>
+  <div nz-row class="marginTop">
+    <p nz-col [nzSpan]="8" class="largeHL">
+      任务状态：
+    </p>
+    <p *ngIf="!isEditor" nz-col [nzSpan]="16" class="textRight largeHL">
+      {{taskDetail['statusCn']}}
+    </p>
+    <div *ngIf="isEditor" nz-col [nzSpan]="16">
+      <nz-select style="width: 100%;" [(ngModel)]="single" [nzSize]="size">
+        <nz-option
+          *ngFor="let option of options"
+          [nzLabel]="option.label"
+          [nzValue]="option.value"
+          [nzDisabled]="option['disabled']">
+        </nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <div nz-row class="marginTop">
+    <p nz-col [nzSpan]="8">
+      执行人：
+    </p>
+    <p *ngIf="!isEditor" nz-col [nzSpan]="16" class="textRight">
+      {{taskDetail['assignmentName']}}
+    </p>
+    <div *ngIf="isEditor" nz-col [nzSpan]="16">
+      <app-scroll-select [selectList]="selectList" (checkedSele)="getYear($event)" [selectValue]="selecPeople" [size]="'large'"></app-scroll-select>
+    </div>
+  </div>
+  <div nz-row class="marginTop">
+    <p nz-col [nzSpan]="8">
+      任务进度：
+    </p>
+    <p *ngIf="!isEditor" nz-col [nzSpan]="16" class="textRight">
+      {{taskDetail['progress']}}
+    </p>
+    <div *ngIf="isEditor" nz-col [nzSpan]="16">
+      <nz-input [(ngModel)]="taskDetail['progress']" [nzSize]="'large'">
+        <ng-template #addOnAfter>%</ng-template>
+      </nz-input>
+    </div>
+  </div>
+  <!--<div nz-row class="marginTop">-->
+    <!--<p nz-col [nzSpan]="8">任务优先级：</p>-->
+    <!--<p *ngIf="!isEditor" nz-col [nzSpan]="12" class="textRight">{{taskDetail['rank']}}级</p>-->
+    <!--<div *ngIf="isEditor" nz-col [nzSpan]="12">-->
+      <!--<nz-input [(ngModel)]="rankVal" [nzPlaceHolder]="rankVal" (ngModelChange)="rankChange($event)"></nz-input>-->
+      <!--<p *ngIf="rankRig" [style.color]="'red'">请输入符合规定的优先级！</p>-->
+    <!--</div>-->
+  <!--</div>-->
+  <div class="marginTop">
+    <p class="largeHL">任务描述： </p>
+    <p *ngIf="!isEditor" class="largeHL">&nbsp; &nbsp; &nbsp; {{taskDetail['detail']}}</p>
+    <nz-input *ngIf="isEditor" [(ngModel)]="taskDetail['detail']" [nzType]="'textarea'" [nzAutosize]="{ minRows: 4}" [nzPlaceHolder]="''"></nz-input>
+  </div>
+  <!--<div class="marginTop">-->
+    <!--<p class="largeHL">任务备注： </p>-->
+    <!--<p *ngIf="!isEditor" class="largeHL">&nbsp; &nbsp; &nbsp; {{taskDetail['remark']}}</p>-->
+    <!--<nz-input *ngIf="isEditor" [(ngModel)]="taskDetail['remark']" [nzType]="'textarea'" [nzAutosize]="{ minRows: 4}" [nzPlaceHolder]="''" [nzSize]="'large'"></nz-input>-->
+  <!--</div>-->
+  <div class="textCenter">
+    <!--<div nz-row class="marginTop">-->
+      <!--<p nz-col [nzSpan]="6" class="largeHL">开始日期：</p>-->
+      <!--<p *ngIf="!isEditor" nz-col [nzSpan]="18" class="textRight largeHL">{{taskDetail['start'] | date: 'yyyy-MM-dd HH:mm:ss'}}</p>-->
+      <!--<div *ngIf="isEditor" nz-col [nzSpan]="18">-->
+        <!--<nz-datepicker [(ngModel)]="taskDetail['start']" [nzPlaceHolder]="taskDetail['start']" [nzFormat]="'YYYY-MM-DD hh:mm:ss'" [style.width]="'100%'"></nz-datepicker>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div nz-row class="marginTop">-->
+      <!--<p nz-col [nzSpan]="6">结束日期：</p>-->
+      <!--<p *ngIf="!isEditor" nz-col [nzSpan]="18" class="textRight">{{taskDetail['end'] | date: 'yyyy-MM-dd'}}</p>-->
+      <!--<div *ngIf="isEditor" nz-col [nzSpan]="18">-->
+        <!--<nz-datepicker [(ngModel)]="taskDetail['end']" [nzPlaceHolder]="taskDetail['end']" [nzFormat]="'YYYY/MM/DD'" [style.width]="'80%'"></nz-datepicker>-->
+      <!--</div>-->
+    <!--</div>-->
+  </div>
+  <div nz-row  class="marginTop">
+    <div class="textCenter" nz-col [nzSpan]="12">
+      <button *ngIf="isEditor" nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="cancleEdit()" class="ant-mypri-btn">
+        <span>取消编辑</span>
+      </button>
+      <button *ngIf="!isEditor" nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="cancleTask()" class="ant-mypri-btn">
+        <span>取消任务</span>
+      </button>
+    </div>
+    <div class="textCenter" nz-col [nzSpan]="12">
+      <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="editTask()" class="ant-mypri-btn">
+        <span>{{isEditor ? '保存编辑' : '任务编辑'}}</span>
+      </button>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,17 @@
+.loginCenter{
+  height:100%;
+  display: flex;
+  flex-direction: column;
+}
+.indwei{
+  flex: 1;
+}
+.loginBtn{
+  text-align: center;
+}
+.login-form-forgot{
+  float:right;
+}
+.login-form-button{
+  width:100%;
+}

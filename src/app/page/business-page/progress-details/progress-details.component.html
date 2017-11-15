@@ -1,0 +1,107 @@
+<div class="page-cont-area">
+  <div class="progDetMar" nz-row>
+    <div nz-col [nzSpan]="8">
+      <p class="largeHL">项目名称：</p>
+    </div>
+    <div nz-col [nzSpan]="16">
+      <p class="textRight largeHL" *ngIf="!isEdit">
+        {{progressInfo['name']}}
+      </p>
+      <nz-input *ngIf="isEdit" [(ngModel)]="progressInfo['name']" [nzType]="'textarea'" [nzAutosize]="{minRows: 2}" [nzPlaceHolder]="''" [nzSize]="'large'"></nz-input>
+    </div>
+  </div>
+  <div class="progDetMar" nz-row>
+    <div nz-col [nzSpan]="8">
+      <p class="largeHL">项目进度：</p>
+    </div>
+    <div nz-col [nzSpan]="16">
+      <div *ngIf="!isEdit">
+        <nz-progress class="largeHL" [ngModel]="progressInfo['progress']" [nzStrokeWidth]="5" [nzStatus]="'active'"></nz-progress>
+      </div>
+      <div *ngIf="isEdit">
+        <nz-input [nzSize]="'large'" [(ngModel)]="progressInfo['progress']">
+          <ng-template #addOnAfter>%</ng-template>
+        </nz-input>
+      </div>
+    </div>
+  </div>
+  <div class="progDetMar" nz-row>
+    <div nz-col [nzSpan]="8">
+      <p class="largeHL">开始日期：</p>
+    </div>
+    <div nz-col [nzSpan]="16">
+      <p  class="textRight largeHL">{{progressInfo['createTime'] | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+      <!--<nz-datepicker [nzSize]="'large'" [(ngModel)]="progressInfo['createTime']" [nzPlaceHolder]="progressInfo['createTime']" [nzFormat]="'YYYY-MM-DD hh:mm:ss'" *ngIf="isEdit" [style.width]="'100%'"></nz-datepicker>-->
+    </div>
+  </div>
+  <div class="progDetMar" nz-row>
+    <div nz-col [nzSpan]="8">
+      <p class="largeHL">预计完工：</p>
+    </div>
+    <div nz-col [nzSpan]="16">
+      <p class="textRight largeHL" *ngIf="!isEdit">{{progressInfo['estimatedTime']}}天</p>
+      <nz-input *ngIf="isEdit" [nzSize]="'large'" [(ngModel)]="progressInfo['estimatedTime']">
+        <ng-template #addOnAfter>天</ng-template>
+      </nz-input>
+      <!--<p class="textRight largeHL" *ngIf="!isEdit">{{progressInfo['estimatedTime'] | date: 'yyyy-MM-dd'}}</p>-->
+      <!--<nz-datepicker [nzSize]="'large'" [(ngModel)]="progressInfo['estimatedTime']" [nzPlaceHolder]="progressInfo['estimatedTime']" [nzFormat]="'YYYY/MM/DD'" *ngIf="isEdit" [style.width]="'100%'"></nz-datepicker>-->
+    </div>
+  </div>
+  <div class="progDetMar" *ngIf="progressInfo['statusCn'] === '已完成'" nz-row>
+    <div nz-col [nzSpan]="8">
+      <p class="'largeHL">实际完工：</p>
+    </div>
+    <div nz-col [nzSpan]="16">
+      <p class="textRight largeHL">{{progressInfo['endTime'] | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+      <!--<nz-datepicker [nzSize]="'largeHL'" [(ngModel)]="progressInfo['endTime']" [nzPlaceHolder]="progressInfo['endTime']" [nzFormat]="'YYYY-MM-DD hh:mm:ss'" *ngIf="isEdit" [style.width]="'100%'"></nz-datepicker>-->
+    </div>
+  </div>
+  <div class="progDetMar" nz-row>
+    <div nz-col [nzSpan]="8">
+      <p class="'largeHL'">项目经理：</p>
+    </div>
+    <div nz-col [nzSpan]="16">
+      <p class="textRight" *ngIf="!isEdit">
+        {{progressInfo['managerName']}}
+      </p>
+      <nz-select *ngIf="isEdit" style="width: 100%;" [(ngModel)]="single" [nzSize]="size">
+        <nz-option
+          *ngFor="let option of options"
+          [nzLabel]="option.label"
+          [nzValue]="option.value"
+          [nzDisabled]="option['disabled']">
+        </nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <!--<div class="progDetMar" nz-row>-->
+    <!--<div nz-col [nzSpan]="8">-->
+      <!--<p>参与人员：</p>-->
+    <!--</div>-->
+    <!--<div nz-col [nzSpan]="16">-->
+      <!--<p class="textRight">-->
+        <!--{{progressInfo.joinStaff}}-->
+      <!--</p>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <div class="progDetMar">
+    <p>项目描述：</p>
+    <nz-input [(ngModel)]="progressInfo['description']" [nzType]="'textarea'" [nzAutosize]="{ minRows: 5}" [nzPlaceHolder]="''" [nzReadonly]="!isEdit"></nz-input>
+  </div>
+  <!--<div class="progDetMar">-->
+    <!--<p>项目备注：</p>-->
+    <!--<nz-input [(ngModel)]="progressInfo.remark" [nzType]="'textarea'" [nzAutosize]="{ minRows: 5}" [nzPlaceHolder]="''" [nzReadonly]="!isEdit"></nz-input>-->
+  <!--</div>-->
+  <div class="progDetMar">
+    <button nz-button [nzType]="isEdit ? 'primary' : ''" [nzSize]="'large'" class="widthOne ant-mypri-btn" (click)="proEdit()">
+      <span>{{ isEdit ? '保存' : '编辑'}}</span>
+    </button>
+    <button *ngIf="isEdit" nz-button [nzType]="'primary'" [nzSize]="'large'" class="widthOne marginTop" (click)="cancleEdit()">
+      <span>取消</span>
+    </button>
+  </div>
+</div>
+<div class="editMyTask" (click)="showModal()">
+  <i class="anticon anticon-delete"></i>
+</div>
